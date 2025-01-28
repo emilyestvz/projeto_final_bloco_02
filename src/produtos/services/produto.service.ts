@@ -72,4 +72,33 @@ export class ProdutoService {
 
         return await this.produtoRepository.delete(id);
     }
+
+    // Implementações
+    async findByPrecoMaior(preco: number): Promise<Produto[]> {
+        return await this.produtoRepository.find({
+            where: {
+                preco: MoreThan(preco)
+            },
+            order: {
+                preco: 'ASC'
+            },
+            relations: {
+                categoria: true
+            }
+        })
+    }
+
+    async findByPrecoMenor(preco: number): Promise<Produto[]> {
+        return await this.produtoRepository.find({
+            where: {
+                preco: LessThan(preco)
+            },
+            order: {
+                preco: 'DESC'
+            },
+            relations: {
+                categoria: true
+            }
+        })
+    }
 }
