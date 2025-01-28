@@ -20,8 +20,8 @@ export class CategoriaController {
 
   @Get('/categoria/:categoria')
   @HttpCode(HttpStatus.OK)
-  findAllByTitulo(@Param('tipo') tipo: string): Promise<Categoria[]> {
-    return this.categoriaService.findAllByTipo(tipo);
+  findAllByTitulo(@Param('categoria') categoria: string): Promise<Categoria[]> {
+    return this.categoriaService.findAllByNome(categoria);
   }
 
   @Post()
