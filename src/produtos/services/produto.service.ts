@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import { DeleteResult, Like, Repository } from "typeorm";
+import { DeleteResult, LessThan, Like, MoreThan, Repository } from "typeorm";
 import { Produto } from "../entities/produto.entity";
 import { CategoriaService } from "../../categoria/services/categoria.service";
 import { InjectRepository } from "@nestjs/typeorm";
@@ -19,7 +19,7 @@ export class ProdutoService {
                     categoria: true
                 }
             }
-        );
+        )
     }
 
     async findById(id: number): Promise<Produto> {
@@ -37,7 +37,6 @@ export class ProdutoService {
             throw new HttpException('Produto não encontrado!', HttpStatus.NOT_FOUND);
 
         return produto;
-
     }
 
     async findAllByNome(nome: string): Promise<Produto[]> {
@@ -56,7 +55,6 @@ export class ProdutoService {
         await this.categoriaService.findById(produto.categoria.id)
 
         return await this.produtoRepository.save(produto);
-
     }
 
     async update(produto: Produto): Promise<Produto> {
@@ -73,6 +71,5 @@ export class ProdutoService {
         await this.findById(id);
 
         return await this.produtoRepository.delete(id);
-
     }
 }
